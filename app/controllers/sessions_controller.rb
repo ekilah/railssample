@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       #remember the user if they wanted us to on this computer
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       # redirect to logged-in user's page
-      redirect_to(user_url(user))
+      use_pre_login_redirect user_url(user)
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'

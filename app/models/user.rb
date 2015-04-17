@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
 
-  validates :password, length: {minimum: 6}
+  validates :password, length: {minimum: 6}, allow_blank: true #blank ok because has_secure_password checks for blank on creation - this is for editing
   has_secure_password
 
   # Returns the hash digest of the given string.

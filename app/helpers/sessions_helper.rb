@@ -43,4 +43,18 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def current_user?(user)
+    return user === current_user
+  end
+
+  def save_pre_login_redirect
+    session[:forwarding_url] = request.url if request.get?
+  end
+
+  def use_pre_login_redirect(default)
+    redirect_url = session[:forwarding_url] || default
+    session.delete(:forwarding_url)
+    redirect_to redirect_url
+  end
 end
